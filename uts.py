@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import numpy as np
 
 # Load the dataset
-file_path = 'prostate_cancerone.csv'
+file_path = 'Prostate_Cancer_Scaled.csv'
 data = pd.read_csv(file_path)
 
 # Pre-processing
