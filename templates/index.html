@@ -4,42 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prostate Cancer Prediction</title>
+    <style>
+        /* General body and HTML settings */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+
+            /* Background settings - You can change the background here */
+            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20230605/pngtree-an-animation-of-a-medical-room-image_2881542.jpg'); /* <-- Ganti URL ini untuk mengubah gambar background */
+            background-size: cover;  /* Mengubah agar gambar menutupi seluruh halaman */
+            background-position: center;  /* Mengatur gambar di posisi tengah */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* Landing container styling */
+        .landing-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Latar belakang gelap transparan untuk konten */
+            padding: 50px;
+            border-radius: 15px;
+        }
+
+        /* Title animation */
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: revealText 2s ease forwards;
+            transform: translateX(-100%);
+        }
+
+        @keyframes revealText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Paragraph and button styling */
+        p {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            background-color: #5cb85c;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Prostate Cancer Prediction</h1>
-    <form method="POST">
-        <label for="radius">Radius:</label><br>
-        <input type="text" id="radius" name="radius" required><br><br>
-
-        <label for="texture">Texture:</label><br>
-        <input type="text" id="texture" name="texture" required><br><br>
-
-        <label for="perimeter">Perimeter:</label><br>
-        <input type="text" id="perimeter" name="perimeter" required><br><br>
-
-        <label for="area">Area:</label><br>
-        <input type="text" id="area" name="area" required><br><br>
-
-        <label for="smoothness">Smoothness:</label><br>
-        <input type="text" id="smoothness" name="smoothness" required><br><br>
-
-        <label for="compactness">Compactness:</label><br>
-        <input type="text" id="compactness" name="compactness" required><br><br>
-
-        <label for="symmetry">Symmetry:</label><br>
-        <input type="text" id="symmetry" name="symmetry" required><br><br>
-
-        <label for="fractal_dimension">Fractal Dimension:</label><br>
-        <input type="text" id="fractal_dimension" name="fractal_dimension" required><br><br>
-
-        <input type="submit" value="Predict">
-    </form>
-
-    {% if results %}
-    <h2>Prediction Results:</h2>
-    <p>Naive Bayes: {{ results['Naive Bayes'] }}</p>
-    <p>Decision Tree: {{ results['Decision Tree'] }}</p>
-    <p>Random Forest: {{ results['Random Forest'] }}</p>
-    {% endif %}
+    <div class="landing-container">
+        <h1>Welcome to Prostate Cancer Prediction</h1>
+        <p>Use our predictive system to get insights into prostate cancer likelihood. Start by filling out a simple form with key parameters.</p>
+        <!-- Flask URL_for to navigate to the form page -->
+        <a href="{{ url_for('form') }}" class="btn">Get Started</a>
+    </div>
 </body>
 </html>

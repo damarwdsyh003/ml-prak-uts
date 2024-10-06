@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prostate Cancer Prediction Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5); /* Gradien yang lembut */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Lebih besar untuk efek floating */
+            padding: 40px 50px;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .form-container:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Menambahkan animasi hover */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #5cb85c;
+            box-shadow: 0 0 8px rgba(92, 184, 92, 0.3); /* Efek fokus */
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+            transform: translateY(-2px); /* Tombol naik sedikit saat di-hover */
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0); /* Efek tombol kembali saat diklik */
+        }
+
+        /* Efek untuk input placeholder */
+        ::placeholder {
+            color: #bbb;
+            opacity: 1;
+        }
+
+        /* Style pada input ketika tidak ada teks */
+        input:not(:placeholder-shown):invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Fill in Prediction Details</h2>
+        <!-- Method POST to send form data to the Flask route -->
+        <form method="POST" action="{{ url_for('form') }}">
+            <label for="radius">Radius:</label>
+            <input type="text" id="radius" name="radius" placeholder="Enter radius value" required>
+
+            <label for="texture">Texture:</label>
+            <input type="text" id="texture" name="texture" placeholder="Enter texture value" required>
+
+            <label for="perimeter">Perimeter:</label>
+            <input type="text" id="perimeter" name="perimeter" placeholder="Enter perimeter value" required>
+
+            <label for="area">Area:</label>
+            <input type="text" id="area" name="area" placeholder="Enter area value" required>
+
+            <label for="smoothness">Smoothness:</label>
+            <input type="text" id="smoothness" name="smoothness" placeholder="Enter smoothness value" required>
+
+            <label for="compactness">Compactness:</label>
+            <input type="text" id="compactness" name="compactness" placeholder="Enter compactness value" required>
+
+            <label for="symmetry">Symmetry:</label>
+            <input type="text" id="symmetry" name="symmetry" placeholder="Enter symmetry value" required>
+
+            <label for="fractal_dimension">Fractal Dimension:</label>
+            <input type="text" id="fractal_dimension" name="fractal_dimension" placeholder="Enter fractal dimension" required>
+
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+</html>
