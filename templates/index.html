@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prostate Cancer Prediction</title>
+</head>
+<body>
+    <h1>Prostate Cancer Prediction</h1>
+    <form method="POST">
+        <label for="radius">Radius:</label><br>
+        <input type="text" id="radius" name="radius" required><br><br>
+
+        <label for="texture">Texture:</label><br>
+        <input type="text" id="texture" name="texture" required><br><br>
+
+        <label for="perimeter">Perimeter:</label><br>
+        <input type="text" id="perimeter" name="perimeter" required><br><br>
+
+        <label for="area">Area:</label><br>
+        <input type="text" id="area" name="area" required><br><br>
+
+        <label for="smoothness">Smoothness:</label><br>
+        <input type="text" id="smoothness" name="smoothness" required><br><br>
+
+        <label for="compactness">Compactness:</label><br>
+        <input type="text" id="compactness" name="compactness" required><br><br>
+
+        <label for="symmetry">Symmetry:</label><br>
+        <input type="text" id="symmetry" name="symmetry" required><br><br>
+
+        <label for="fractal_dimension">Fractal Dimension:</label><br>
+        <input type="text" id="fractal_dimension" name="fractal_dimension" required><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if results %}
+    <h2>Prediction Results:</h2>
+    <p>Naive Bayes: {{ results['Naive Bayes'] }}</p>
+    <p>Decision Tree: {{ results['Decision Tree'] }}</p>
+    <p>Random Forest: {{ results['Random Forest'] }}</p>
+    {% endif %}
+</body>
+</html>
