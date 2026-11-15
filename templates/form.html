@@ -3,132 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prostate Cancer Prediction Form</title>
+    <title>ProstaScan | Assessment</title>
     <style>
+        :root {
+            --navy: #102a43;
+            --blue: #1976d2;
+            --teal: #18a999;
+            --text: #243b53;
+            --muted: #627d98;
+            --line: #d9e2ec;
+        }
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #74ebd5, #acb6e5); /* Gradien yang lembut */
             margin: 0;
-            padding: 0;
+            padding: 36px 20px;
+            color: var(--text);
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4ff, #f4fbfa);
+        }
+        .page { width: min(920px, 100%); margin: auto; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .brand { color: var(--navy); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.03em; }
+        .back-link { color: var(--blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; }
+        .card {
+            padding: clamp(26px, 5vw, 48px);
+            border: 1px solid rgba(255,255,255,0.9);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 20px 55px rgba(16,42,67,0.12);
+        }
+        h1 { margin: 0 0 10px; color: var(--navy); font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -0.04em; }
+        .subtitle { margin: 0; color: var(--muted); line-height: 1.6; }
+        .instruction {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            gap: 12px;
+            align-items: flex-start;
+            margin: 26px 0 30px;
+            padding: 15px 17px;
+            border: 1px solid #b8e4de;
+            border-radius: 12px;
+            color: #145c55;
+            background: #effbf9;
+            font-size: 0.92rem;
+            line-height: 1.5;
         }
-
-        .form-container {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Lebih besar untuk efek floating */
-            padding: 40px 50px;
-            max-width: 500px;
+        .instruction strong { color: #0e4b46; }
+        .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--navy); font-size: 0.91rem; font-weight: 700; }
+        input[type="number"] {
             width: 100%;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .form-container:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Menambahkan animasi hover */
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: block;
-            color: #555;
-            font-size: 16px;
-            text-align: left;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            border-color: #5cb85c;
-            box-shadow: 0 0 8px rgba(92, 184, 92, 0.3); /* Efek fokus */
+            padding: 13px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
             outline: none;
+            color: var(--text);
+            background: #fbfdff;
+            font: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-
-        input[type="submit"] {
-            background-color: #5cb85c;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
+        input[type="number"]:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(25,118,210,0.12); }
+        input[type="number"]:invalid:not(:placeholder-shown) { border-color: #d64545; }
+        .example { display: block; margin-top: 6px; color: var(--muted); font-size: 0.78rem; }
+        .submit {
             width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 30px;
+            padding: 15px;
+            border: 0;
+            border-radius: 11px;
+            color: white;
+            background: linear-gradient(100deg, var(--blue), #135bb0);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 800;
+            box-shadow: 0 9px 20px rgba(25,118,210,0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        input[type="submit"]:hover {
-            background-color: #4cae4c;
-            transform: translateY(-2px); /* Tombol naik sedikit saat di-hover */
-        }
-
-        input[type="submit"]:active {
-            transform: translateY(0); /* Efek tombol kembali saat diklik */
-        }
-
-        /* Efek untuk input placeholder */
-        ::placeholder {
-            color: #bbb;
-            opacity: 1;
-        }
-
-        /* Style pada input ketika tidak ada teks */
-        input:not(:placeholder-shown):invalid {
-            border-color: red;
+        .submit:hover { transform: translateY(-2px); box-shadow: 0 13px 25px rgba(25,118,210,0.3); }
+        .disclaimer { margin: 20px 0 0; color: var(--muted); font-size: 0.78rem; text-align: center; }
+        @media (max-width: 620px) {
+            body { padding: 20px 14px; }
+            .fields { grid-template-columns: 1fr; gap: 18px; }
+            .topbar { margin-bottom: 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Fill in Prediction Details</h2>
-        <!-- Method POST to send form data to the Flask route -->
-        <form method="POST" action="{{ url_for('form') }}">
-            <label for="radius">Radius:</label>
-            <input type="text" id="radius" name="radius" placeholder="Enter radius value" required>
-
-            <label for="texture">Texture:</label>
-            <input type="text" id="texture" name="texture" placeholder="Enter texture value" required>
-
-            <label for="perimeter">Perimeter:</label>
-            <input type="text" id="perimeter" name="perimeter" placeholder="Enter perimeter value" required>
-
-            <label for="area">Area:</label>
-            <input type="text" id="area" name="area" placeholder="Enter area value" required>
-
-            <label for="smoothness">Smoothness:</label>
-            <input type="text" id="smoothness" name="smoothness" placeholder="Enter smoothness value" required>
-
-            <label for="compactness">Compactness:</label>
-            <input type="text" id="compactness" name="compactness" placeholder="Enter compactness value" required>
-
-            <label for="symmetry">Symmetry:</label>
-            <input type="text" id="symmetry" name="symmetry" placeholder="Enter symmetry value" required>
-
-            <label for="fractal_dimension">Fractal Dimension:</label>
-            <input type="text" id="fractal_dimension" name="fractal_dimension" placeholder="Enter fractal dimension" required>
-
-            <input type="submit" value="Predict">
-        </form>
-    </div>
+    <main class="page">
+        <nav class="topbar">
+            <div class="brand">ProstaScan</div>
+            <a class="back-link" href="{{ url_for('landing') }}">← Back home</a>
+        </nav>
+        <section class="card">
+            <h1>Enter assessment data</h1>
+            <p class="subtitle">Provide the eight normalized measurements used by the prediction models.</p>
+            <div class="instruction">
+                <span aria-hidden="true">ⓘ</span>
+                <span><strong>Please input values between 0 and 1.</strong> The examples below are taken from the scaled dataset and show the expected format.</span>
+            </div>
+            <form method="POST" action="{{ url_for('form') }}">
+                <div class="fields">
+                    <div>
+                        <label for="radius">Radius</label>
+                        <input type="number" id="radius" name="radius" min="0" max="1" step="any" placeholder="e.g. 0.875" required>
+                        <span class="example">Example: 0.875</span>
+                    </div>
+                    <div>
+                        <label for="texture">Texture</label>
+                        <input type="number" id="texture" name="texture" min="0" max="1" step="any" placeholder="e.g. 0.0625" required>
+                        <span class="example">Example: 0.0625</span>
+                    </div>
+                    <div>
+                        <label for="perimeter">Perimeter</label>
+                        <input type="number" id="perimeter" name="perimeter" min="0" max="1" step="any" placeholder="e.g. 0.825" required>
+                        <span class="example">Example: 0.825</span>
+                    </div>
+                    <div>
+                        <label for="area">Area</label>
+                        <input type="number" id="area" name="area" min="0" max="1" step="any" placeholder="e.g. 0.4487" required>
+                        <span class="example">Example: 0.4487</span>
+                    </div>
+                    <div>
+                        <label for="smoothness">Smoothness</label>
+                        <input type="number" id="smoothness" name="smoothness" min="0" max="1" step="any" placeholder="e.g. 1.0" required>
+                        <span class="example">Example: 1.0</span>
+                    </div>
+                    <div>
+                        <label for="compactness">Compactness</label>
+                        <input type="number" id="compactness" name="compactness" min="0" max="1" step="any" placeholder="e.g. 0.7818" required>
+                        <span class="example">Example: 0.7818</span>
+                    </div>
+                    <div>
+                        <label for="symmetry">Symmetry</label>
+                        <input type="number" id="symmetry" name="symmetry" min="0" max="1" step="any" placeholder="e.g. 0.6331" required>
+                        <span class="example">Example: 0.6331</span>
+                    </div>
+                    <div>
+                        <label for="fractal_dimension">Fractal Dimension</label>
+                        <input type="number" id="fractal_dimension" name="fractal_dimension" min="0" max="1" step="any" placeholder="e.g. 0.5909" required>
+                        <span class="example">Example: 0.5909</span>
+                    </div>
+                </div>
+                <button class="submit" type="submit">Generate prediction →</button>
+            </form>
+            <p class="disclaimer">For educational purposes only. This prediction is not a medical diagnosis.</p>
+        </section>
+    </main>
 </body>
 </html>
